@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Empezando con VUE</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main class="main">
+    <div id="shopping-list">
+      <div class="header">
+        <h1 class="title mb-2rem">
+          {{ header }}
+        </h1>
+        <button v-if="state === 'default'" @click="changeState('edit')" class="button-primary">
+          Empezar
+        </button>
+      </div>
+      <div v-if="state === 'edit'" class="form">
+        <input class="input mb-2rem" type="text" v-model="newItem" placeholder="Agregá un elemento a la lista de compras">
+        <button @click="saveItem" class="button-primary mb-2rem">
+          Agregar item
+        </button>
+        <button @click="changeState('default')" class="button-tertiary">
+          Cancelar
+        </button>
+        <p class="subtitle mb-2rem">
+          {{ message ? message : 'Ups, ocurrio un error' }}
+        </p>
+        <div>
+          <p>{{ lengthList }}</p>
+          <p v-if="items.length === 0" class="body-i">Por ahora no hay elementos para comprar, agregalos !</p>
+          <ul>
+            <li v-for="item in reservedItems" :class="{boughted: item.bought}" @click="toggleBought(item)">
+              {{ item.label }}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>   
+  </main>
+</body>
+<script src="https://unpkg.com/vue"></script>
+<script>
+  var shoppingList = new Vue({
+    el: '#shopping-list',
+    data: {
+      state: 'default',
+      header: 'Listapp Vue',
+      message: 'Listado:',
+      newItem: '',
+      items: []
+    },
+    computed: {
+      lengthList() {
+        return this.items.length;
+      },
+      reservedItems() {
+        return this.items.slice(0).reverse();
+      }
+    },
+    methods: {
+      saveItem: function() {
+        if (this.newItem != '') {
+          this.items.push({
+          label: this.newItem,
+          bought: false,
+        });
+        this.newItem = '';
+        }
+      },
+      changeState: function(newState) {
+        this.state = newState;
+        this.newItem = '';
+      },
+      toggleBought: function(item) {
+        item.bought = !item.bought;
+      }
+    }
+  })
+</script>
+</html>
