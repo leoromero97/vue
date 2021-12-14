@@ -4,42 +4,66 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="keywords" content="List | Lista | Vue">
+  <meta name="author" content="Leonardo E. Gerbacio Romero">
+  <meta property="og:type" content="App">
+  <link rel="shortcut icon" href="img/il-list.svg" type="image/x-icon">
   <title>Empezando con VUE</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <main class="main">
-    <div id="shopping-list">
+  <main id="shopping-list" :class="[darkMode ? 'darkMode' : 'main']">
+    <div class="container">
       <div class="header">
         <h1 class="title mb-2rem">
           {{ header }}
         </h1>
+        <div class="toggleWrapper">
+          <label class="toggle">
+            <input type="checkbox" :checked="darkMode ? 'checked' : false" @click="toggleMode()">
+            <span class="toggler round"></span>
+          </label>
+        </div>   
+      </div>
+      <div v-if="state === 'default'" class="containerIllustration">
+        <img src="img/il-list.svg" alt="List Illustration" class="illustration">
         <button v-if="state === 'default'" @click="changeState('edit')" class="button-primary">
           Empezar
         </button>
       </div>
       <div v-if="state === 'edit'" class="form">
-        <input class="input mb-2rem" type="text" v-model="newItem" placeholder="Agregá un elemento a la lista de compras">
-        <button @click="saveItem" class="button-primary mb-2rem">
+        <input class="input mb-2rem mr-1rem" type="text" v-model="newItem" placeholder="Agregá un elemento a la lista de compras">
+        <button @click="saveItem" class="button-primary mb-2rem mr-1rem">
           Agregar item
         </button>
-        <button @click="changeState('default')" class="button-tertiary">
-          Cancelar
-        </button>
-        <p class="subtitle mb-2rem">
-          {{ message ? message : 'Ups, ocurrio un error' }}
-        </p>
+        <div class="containerMessage mb-2rem">
+          <p class="subtitle mr-1rem">
+            {{ message ? message : 'Ups, ocurrio un error' }}
+            {{ lengthList }}
+          </p>
+          <button @click="clearList" class="button-secondary">
+            Limpiar
+          </button>
+        </div>
         <div>
-          <p>{{ lengthList }}</p>
-          <p v-if="items.length === 0" class="body-i">Por ahora no hay elementos para comprar, agregalos !</p>
+          <p v-if="items.length === 0" class="body-i">
+            Por ahora no hay elementos para comprar, agregalos !
+          </p>
           <ul>
-            <li v-for="item in reservedItems" :class="{boughted: item.bought}" @click="toggleBought(item)">
-              {{ item.label }}
+            <li v-for="item in reservedItems" class="containerBox">
+              <span :class="[item.bought ? 'boxBoughted' : 'box']" @click="toggleBought(item)">
+                <img src="img/ic-check.svg" alt="Icono check" class="icon" v-if="item.bought === false">
+                <img src="img/ic-close.svg" alt="Icono close" class="icon" v-else="item.bought === true">
+              </span>
+              <p :class="[item.bought ? 'boughted' : 'item']">{{ item.label }}</p>
             </li>
           </ul>
         </div>
       </div>
-    </div>   
+      <button v-if="state === 'edit'" @click="changeState('default')" class="button-tertiary">
+        Cancelar
+      </button>
+    </div>
   </main>
 </body>
 <script src="https://unpkg.com/vue"></script>
@@ -48,6 +72,7 @@
     el: '#shopping-list',
     data: {
       state: 'default',
+      darkMode: true,
       header: 'Listapp Vue',
       message: 'Listado:',
       newItem: '',
@@ -77,6 +102,14 @@
       },
       toggleBought: function(item) {
         item.bought = !item.bought;
+      },
+      toggleMode: function() {
+        this.darkMode = !this.darkMode;
+      },
+      clearList: function() {
+        if (this.items.length >= 1) {
+          this.items.splice(0, this.items.length);
+        }
       }
     }
   })

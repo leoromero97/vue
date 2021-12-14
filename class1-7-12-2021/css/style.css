@@ -15,30 +15,187 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Roboto', sans-serif;
-  background-color: var(--white);
-  color: var(--black);
 }
 
-.main {
+.main,
+.darkMode {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 6rem 4rem;
+  padding: 6rem 2.4rem;
+  background-color: var(--white);
+  color: var(--black);
+  height: 100vh;
+  transition: bacground 0.3s ease-in-out;
 }
 
-#shopping-list {
+.darkMode {
+  background-color: var(--black);
+  color: var(--white-primary);
+}
+
+.container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
   max-width: 800px;
   width: 100%;
 }
 
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 4rem;
+}
+
+.title {
+  color: var(--primary);
+  font-size: 2.2rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.toggleWrapper {
+  position: absolute;
+  right: 2rem;
+  top: 2rem;
+}
+
+.toggle {
+  position: relative;
+  display: inline-block;
+  width: 5.8rem;
+  height: 3rem;
+}
+
+.toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggler {
+  border: 1px solid var(--primary);
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--black);
+  transition: 0.4s;
+}
+
+.toggler:before {
+  position: absolute;
+  content: "";
+  height: 2.3rem;
+  width: 2.2rem;
+  left: 0.4rem;
+  bottom: 0.3rem;
+  background: var(--primary);
+  transition: 0.4s;
+}
+
+.toggle input:checked + .toggler {
+  background: var(--white);
+} 
+
+.toggle input:focus {
+  box-shadow: 0 0 0.2rem var(--white);
+}
+
+.toggle input:checked + .toggler:before {
+  transform: translateX(2.6rem);
+} 
+
+.toggler.round {
+  border-radius: 3.4rem;
+}
+
+.toggler.round:before {
+  border-radius: 50%;
+}
+
+.containerIllustration {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.illustration {
+  height: 16rem;
+  margin-bottom: 8rem;
+  width: 16rem;
+}
+
 .form {
-  background-color: var(--white);
+  background-color: transparent;
   border: 1px solid var(--primary);
   border-radius: 10px;
   box-shadow: 0px 1px 2px var(--primary-50);
   padding: 2rem;
+  margin-bottom: 4rem;
   width: 100%;
+}
+
+.input {
+  background-color: transparent;
+  border: 1px solid var(--secondary);
+  color: var(--primary);
+  border-radius: 1.2rem;
+  font-size: 1.4rem;
+  padding: 0.6rem;
+  width: 100%;
+  max-width: 40rem;
+}
+
+.input:focus {
+  border: 1.5px solid var(--primary);
+}
+
+.containerMessage {
+  align-items: center;
+  display: flex;
+}
+
+.subtitle {
+  font-size: 1.8rem;
+  line-height: 2rem;
+  font-weight: 600;
+}
+
+.body-i {
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.7rem;
+}
+
+.containerBox {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 0.8rem;
+}
+
+.box,
+.boxBoughted {
+  align-items: center;
+  display: flex;
+  border: 1px solid var(--primary);
+  border-radius: 0.4rem;
+  justify-content: center;
+  padding: 0.2rem;
+  height: 16px;
+  width: 16px;
+  margin-right: 0.4rem;
+}
+
+.boxBoughted {
+  border: 1px solid var(--secondary-50);
 }
 
 .boughted {
@@ -46,8 +203,18 @@ body {
   text-decoration: line-through;
 }
 
+.item {
+  color: var(--primary);
+}
+
+.icon {
+  height: 12px;
+  width: 12px;
+}
+
 /* Buttons */
 .button-primary,
+.button-secondary,
 .button-tertiary {
   background-color: var(--primary);
   border: none;
@@ -64,48 +231,52 @@ body {
   background-color: var(--primary-50);
 }
 
+.button-secondary {
+  background-color: var(--secondary);
+}
+
+.button-secondary:hover {
+  background-color: var(--secondary-50);
+}
+
 .button-tertiary {
   border: 1px solid var(--primary);
   background-color: transparent;
   color: var(--primary);
 }
 
-/* Texts */
-.title {
-  color: var(--primary);
-  font-size: 2.2rem;
-  font-weight: 700;
-  text-align: center;
-}
-
-.subtitle {
-  color: var(--black);
-  font-size: 1.8rem;
-  line-height: 2rem;
-  font-weight: 600;
-}
-
-.body-i {
-  font-size: 1.5rem;
-  font-weight: 500;
-  line-height: 1.7rem;
-}
-
-/* Inputs */
-
-.input {
-  border: 1px solid var(--secondary);
-  border-radius: 1.2rem;
-  font-size: 1.4rem;
-  padding: 0.6rem;
-}
-
-.input:focus {
-  border: 1.5px solid var(--secondary-50);
-}
-
-
 /* Margins */
 .mb-2rem {
   margin-bottom: 2rem;
+}
+
+.mr-1rem {
+  margin-right: 1rem;
+}
+
+@media screen and (min-width: 678px) {
+  .title {
+    font-size: 3rem;
+  }
+
+  .button-primary,
+  .button-secondary,
+  .button-tertiary {
+    font-size: 1.8rem;
+    padding: 0.8rem 4rem;
+  }
+
+  .subtitle {
+    font-size: 2.2rem;
+  }
+
+  .body-i,
+  .item {
+    font-size: 1.8rem;
+  }
+
+  .input {
+    font-size: 1.6rem;
+    padding: 1rem;
+  }
 }
