@@ -1,0 +1,118 @@
+@import '/css/normalizer.css';
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
+
+:root {
+  --success: #068503;
+  --success-25: #7cbe7b;
+  --error: #850303;
+  --error-25: #ce6c6c;
+  --warning: #857803;
+  --warning-25: #cec369;
+  --info: #3399CC;
+  --info-25: #9ed5f1;
+  --white: #ebeff1;
+  --black: #303041;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Ubuntu', sans-serif;
+  background-color: var(--white);
+  color: var(--black);
+}
+
+.container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding: 6rem 2.4rem;
+}
+
+.content {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  max-width: 700px;
+  width: 100%;
+}
+
+.title {
+  font-size: 2.6rem;
+  font-weight: 600;
+  line-height: 2.8rem;
+  margin-bottom: 4rem;
+}
+
+.error {
+  background-color: var(--error-25);
+  color: var(--error);
+}
+
+.success {
+  background-color: var(--success-25);
+  color: var(--success);
+}
+
+.info {
+  background-color: var(--info-25);
+  color: var(--info);
+}
+
+.warning {
+  background-color: var(--warning-25);
+  color: var(--warning);
+}
+
+.notificationContainer {
+  align-items: flex-start;
+  border-radius: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+  transition: 0.4s;
+  max-width: 500px;
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.notificationClose {
+  font-size: 2.2rem;
+  font-weight: 800;
+}
+
+.notificationTitle {
+  font-weight: 800;
+  font-size: 2.2rem;
+}
+
+.notificationMessage {
+  font-weight: 400;
+  font-size: 1.6rem;
+}
+
+.notificationContainer:hover {
+  box-shadow: 0 0 0.4rem var(--black);
+  transform: translateY(-0.2rem);
+}
+
+@media screen and (min-width: 768px) {
+  .content {
+    max-width: 700px;
+  }
+
+  .title {
+    font-size: 3rem;
+    margin-bottom: 4rem;
+  }
+}

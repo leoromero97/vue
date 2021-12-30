@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vue components - Alert</title>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+  <div id="app" class="container">
+    <div class="content">
+      <h1 class="title">Alert component</h1>
+      <notification-component type="error" header="Ups !">
+        <p>Ocurrió un error al crear el perfil</p>
+      </notification-component>
+      <notification-component type="success" header="Excelente :)">
+        <p>Tu registro fue exitoso, ahora podes personalizar tu perfil!</p>
+      </notification-component>
+      <notification-component type="warning" header="Atención">
+        <p>Tu registro está en proceso, te avisaremos cuando se complete!</p>
+      </notification-component>
+      <notification-component>
+        <p>Notificación por default!</p>
+      </notification-component>
+    </div>
+  </div>
+  <script type="text/x-template" id="notification-template">
+    <div class="notificationContainer" :class="type" v-if="!hidden">
+      <div class="header">
+        <p class="notificationTitle">{{header}}</p>
+        <p class="notificationClose" @click="hide">x</p>
+      </div>
+      <span class="notificationMessage">
+        <slot></slot>
+      </span>
+    </div>
+  </script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://unpkg.com/vue"></script>
+  <script src="app.js"></script>
+</body>
+</html>
