@@ -1,0 +1,98 @@
+@import '/css/normalizer.css';
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
+
+:root {
+  --primary: #0EA2F6;
+  --primary-50: #3c9cd3;
+  --secondary: #306381;
+  --secondary-50: #274658;
+  --white: #F4FCFE;
+  --black-primary: #3D3A50;
+  --black: #303041;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Ubuntu', sans-serif;
+  background-color: var(--black);
+  color: var(--white);
+}
+
+.container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding: 6rem 2.4rem;
+}
+
+.content {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  max-width: 700px;
+  width: 100%;
+}
+
+.title {
+  font-size: 2.6rem;
+  font-weight: 600;
+  line-height: 2.8rem;
+  margin-bottom: 2rem;
+}
+
+.subtitle {
+  font-size: 2rem;
+  font-weight: 400;
+  line-height: 2.2rem;
+  margin-bottom: 4rem;
+}
+
+.card {
+  align-items: center;
+  background-color: var(--white);
+  border-radius: 1.2rem;
+  box-shadow: 0 0 0.4rem var(--secondary-50);
+  color: var(--black-primary);
+  cursor: pointer;
+  display: flex;
+  padding: 1.4rem 2rem;
+  text-align: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+  transition: 0.4s;
+}
+
+.card p {
+  font-weight: 700;
+}
+
+.card:hover {
+  box-shadow: 0 0 0.4rem var(--primary-50);
+  transform: translateY(-0.2rem);
+}
+
+.activeCard {
+  background-color: var(--primary-50);
+  color: var(--white);
+}
+
+@media screen and (min-width: 768px) {
+  .content {
+    max-width: 700px;
+  }
+
+  .title {
+    font-size: 3rem;
+    margin-bottom: 4rem;
+  }
+
+  .subtitle {
+    font-size: 2.8rem;
+    margin-bottom: 6rem;
+  }
+
+  .card {
+    padding: 1.4rem 6rem;
+  }
+}

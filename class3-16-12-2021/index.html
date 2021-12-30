@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vue components - Chanllenge</title>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+  <div id="app" class="container">
+    <div class="content">
+      <h1 class="title">Usuarios de Git</h1>
+      <git-card-component v-for="username in usernames" :username="username"></git-card-component>
+    </div>
+  </div>
+  <script type="text/x-template" id="git-card-template">
+    <div class="card">
+      <div class="cardImageContainer">
+        <img :src="user.avatar_url" alt="User avatar" class="cardImage">
+      </div>
+      <a :href="`https://github.com/${username}`" class="cardTitle" target="blanck">{{user.name}}</a>
+      <span class="cardDate">{{user.created_at}}</span>
+      <p class="cardDescription">{{user.bio}}</p>
+      <div class="cardFriends">
+        <img src="img/user-icon.svg" alt="Icon friends" class="cardFriendsIcon">
+        <p class="cardFriendsDescription">{{user.followers}} amigos</p>
+      </div>
+    </div>
+  </script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://unpkg.com/vue"></script>
+  <script src="app.js"></script>
+</body>
+</html>
